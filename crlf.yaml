@@ -1,11 +1,11 @@
 id: crlf-extended
 info:
-  name: CRLF Injection Detection
+  name: CRLF Extended Set-Cookie and URL Redirection
   author: roninja
   severity: low
   description: CRLF extended from Oralyzer
   reference:
-    - https://hackerone.com/reports/858650
+    - https://github.com/r0075h3ll/Oralyzer/blob/master/core/crlf.py
   tags: crlf, crlf-ext, roninja-crlf, generic
   metadata:
     max-request: 8
