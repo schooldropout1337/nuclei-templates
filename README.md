@@ -28,6 +28,9 @@ This nuclei template is an extended version of the template originally created b
 
 This template can be used with the [Nuclei Scanner](https://github.com/projectdiscovery/nuclei) to scan web applications for CRLF injection vulnerabilities. You can customize the template's HTTP requests and matchers according to your testing needs.
 
+![CRLF Extended Nuclei Templates](crlf-extended-nuclei-templates.jpg)
+
+
 ### Example Usage
 
 ```bash
