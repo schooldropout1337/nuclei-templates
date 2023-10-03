@@ -1,3 +1,5 @@
+![CRLF Extended Nuclei Templates](crlf.jpg)
+
 # Nuclei Template: CRLF Injection Detection (crlf-extended)
 
 ## Table of Contents
