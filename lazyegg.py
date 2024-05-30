@@ -1,3 +1,5 @@
+# Beta Release 30/05/2024 
+# https://github.com/schooldropout1337/lazyegg/
 # tested on Python 3.9.7 - aarch64 Android
 
 import requests
