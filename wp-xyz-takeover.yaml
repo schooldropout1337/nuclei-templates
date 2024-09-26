@@ -28,7 +28,7 @@ http:
       - type: word
         words:
           - "wordpress.com</em> doesn&apos;t&nbsp;exist"
-        condition: or
+        condition: and
 
       - type: word
         words:
