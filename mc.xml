@@ -1,2 +1,2 @@
-<!-- Alternative 4: Multiple properties -->
-<krpano version="1.18" onstart="js(alert('Domain: ' + document.domain + '\nURL: ' + window.location.href));">
+<krpano version="1.18" onstart="js(alert(typeof document));">
+<events onloadcomplete="js(alert('Document type: ' + typeof document + '\nDomain available: ' + ('domain' in document)));"/>
