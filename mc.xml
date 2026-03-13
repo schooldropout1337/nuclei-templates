@@ -1,6 +1,3 @@
-<!-- Alternative 3: Using eval -->
-<krpano version="1.18" onstart="js(eval('alert(document.domain)'));">
-
 <!-- Alternative 4: Multiple properties -->
 <krpano version="1.18" onstart="js(alert('Domain: ' + document.domain + '\nURL: ' + window.location.href));">
 
