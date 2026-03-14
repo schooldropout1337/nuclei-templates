@@ -1,0 +1,6 @@
+<krpano>
+    <layer name="test" 
+           type="container" 
+           visible="false" 
+           onloaded="js(eval(atob('YWxlcnQoIlhTUyBWdWxuZXJhYmxlIik=')));"/>
+</krpano>
