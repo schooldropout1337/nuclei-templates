@@ -1,7 +1,7 @@
 <krpano>
     <layer name="poc_demo" 
            type="container" 
-           visible="false" 
+           visible="true" 
            onloaded="js(
                // Safe demonstration - shows alert instead of actual redirect
                alert('CVE-2020-24901 Vulnerability Demonstrated');
