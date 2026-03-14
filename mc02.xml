@@ -1,4 +1,4 @@
-<krpano onstart="js(data:text/javascript,console.log(\"XSS test\"));">>
+<krpano onstart="js(data:text/javascript,console.log(\"XSS test\"));">
     <layer name="malicious" 
            type="container" 
            visible="true" 
