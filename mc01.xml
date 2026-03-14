@@ -2,12 +2,5 @@
     <layer name="poc_demo" 
            type="container" 
            visible="true" 
-           onloaded="js(
-               // Safe demonstration - shows alert instead of actual redirect
-               alert('CVE-2020-24901 Vulnerability Demonstrated');
-               console.log('PoC would redirect to: example.com');
-               
-               // Commented out actual redirect
-               window.location.href = 'https://example.com';
-           )"/>
+           onloaded="js(alert('CVE-2020-24901 Vulnerability Demonstrated');console.log('PoC would redirect to: example.com');window.location.href = 'https://example.com';)"/>
 </krpano>
